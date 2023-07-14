@@ -3,10 +3,11 @@ import { useFakeProfileContext } from '../context/FakeProfileContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faBuilding, faBuildingColumns, faCalendar, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faGithub, faInstagram, faLinkedin, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { UpdatePersonalInfo, UpdateProfessionalInfo } from '../components';
 
 export const Profile = () => {
 
-    const { personalData, socialMediaUrls, profilePhotoUrl } = useFakeProfileContext();
+    const { personalData, professionalData, socialMediaUrls, profilePhotoUrl } = useFakeProfileContext();
     const [isCollapseOneOpen, setCollapseOne] = useState(false);
     const [isCollapseTwoOpen, setCollapseTwo] = useState(false);
 
@@ -59,7 +60,7 @@ export const Profile = () => {
                                 <p>{personalData.age} y/o</p>
                             </div>
                             <div className="profile-profession">
-                                <p>{personalData.profession}</p>
+                                <p>{professionalData.profession}</p>
                             </div>
                             <div className="profile-about">
                                 <p>{personalData.aboutMe}</p>
@@ -70,17 +71,25 @@ export const Profile = () => {
                         <div className="profile-contact">
                             <div className="profile-flex contact-email">
                                 <p><FontAwesomeIcon icon={faAt} /></p>
-                                <p>{personalData.email}</p>
+                                <p>
+                                    <a href={`mailto:${personalData.email}`} target="_blank">
+                                        {personalData.email}
+                                    </a>
+                                </p>
                             </div>
                             <div className="profile-flex phone-contact">
                                 <p><FontAwesomeIcon icon={faPhone} /></p>
-                                <p>{personalData.phone}</p>
+                                <p>
+                                    <a href={`tel:${personalData.phone}`} target="_blank">
+                                        {personalData.phone}
+                                    </a>
+                                </p>
                             </div>
                         </div>
                         <div className="profile-professional-info">
                             <div className="profile-flex professional-job">
                                 <p><FontAwesomeIcon icon={faBuilding} /></p>
-                                <p>{personalData.company}</p>
+                                <p>{professionalData.company}</p>
                             </div>
                             <div className="profile-flex professional-study">
                                 <p><FontAwesomeIcon icon={faBuildingColumns} /></p>
@@ -89,33 +98,47 @@ export const Profile = () => {
                             <div className="profile-flex professional-experience">
                                 <p><FontAwesomeIcon icon={faCalendar} /></p>
                                 <p>
-                                    {personalData.experience}
-                                    {` ${personalData.experience > 1 ? ' years' : ' year'} `}
+                                    {professionalData.experience}
+                                    {` ${professionalData.experience > 1 ? ' years' : ' year'} `}
                                     of experience
                                 </p>
                             </div>
                         </div>
                         <div className="profile-social-media">
                             <div className={onSocialMediaChecker(socialMediaUrls.linkedin)}>
-                                {onSocialMediaHandler(socialMediaUrls.linkedin, faLinkedin)}
+                                <a href={`${socialMediaUrls.linkedin}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.linkedin, faLinkedin)}
+                                </a>
                             </div>
                             <div className={onSocialMediaChecker(socialMediaUrls.github)}>
-                                {onSocialMediaHandler(socialMediaUrls.github, faGithub)}
+                                <a href={`${socialMediaUrls.github}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.github, faGithub)}
+                                </a>
                             </div>
                             <div className={onSocialMediaChecker(socialMediaUrls.twitter)}>
-                                {onSocialMediaHandler(socialMediaUrls.twitter, faTwitter)}
+                                <a href={`${socialMediaUrls.twitter}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.twitter, faTwitter)}
+                                </a>
                             </div>
                             <div className={onSocialMediaChecker(socialMediaUrls.facebook)}>
-                                {onSocialMediaHandler(socialMediaUrls.facebook, faFacebook)}
+                                <a href={`${socialMediaUrls.facebook}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.facebook, faFacebook)}
+                                </a>
                             </div>
                             <div className={onSocialMediaChecker(socialMediaUrls.instagram)}>
-                                {onSocialMediaHandler(socialMediaUrls.instagram, faInstagram)}
+                                <a href={`${socialMediaUrls.instagram}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.instagram, faInstagram)}
+                                </a>
                             </div>
                             <div className={onSocialMediaChecker(socialMediaUrls.youtube)}>
-                                {onSocialMediaHandler(socialMediaUrls.youtube, faYoutube)}
+                                <a href={`${socialMediaUrls.youtube}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.youtube, faYoutube)}
+                                </a>
                             </div>
                             <div className={onSocialMediaChecker(socialMediaUrls.website)}>
-                                {onSocialMediaHandler(socialMediaUrls.website, faGlobe)}
+                                <a href={`${socialMediaUrls.website}`} target="_blank">
+                                    {onSocialMediaHandler(socialMediaUrls.website, faGlobe)}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -148,12 +171,12 @@ export const Profile = () => {
                     <div className="row" style={{ 'padding': '0', 'margin': '0' }}>
                         <div className="col-6">
                             <div className={`collapse${isCollapseOneOpen ? ' show' : ''}`} id="forms-collapse1">
-                                <p>Aquí va el form</p>
+                                <UpdatePersonalInfo />
                             </div>
                         </div>
                         <div className="col-6">
                             <div className={`collapse${isCollapseTwoOpen ? ' show' : ''}`} id="forms-collapse2">
-                                <p>Aquí va el otro form</p>
+                                <UpdateProfessionalInfo />
                             </div>
                         </div>
                     </div>
