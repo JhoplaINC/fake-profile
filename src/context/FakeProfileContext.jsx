@@ -14,25 +14,29 @@ export const FakeProfileContextProvider = ({children}) => {
 
     const [profilePhotoUrl, setProfilePhotoUrl] = useState('default_profile_photo.png');
     const [socialMediaUrls, setSocialMediaUrls] = useState({
-        linkedin: '',
-        instagram: '',
-        facebook: '',
-        youtube: '',
-        github: ''
+        linkedin: 'sda',
+        github: 'asd',
+        twitter: 'asd',
+        instagram: 'asd',
+        facebook: 'sad',
+        youtube: 'asdsad',
+        website: 'asdsad',
     });
 
     const [personalData, setPersonalData] = useState({
         id: 1,
-        name: 'Name',
-        lastname: 'Lastname',
-        email: 'email@example.com',
-        phone: '+56 9 1234 5678',
+        name: 'John',
+        lastname: 'Doe',
+        aboutMe: `About me`,
+        email: 'email@sadf.sdaf',
+        phone: '+5655656',
         photo: 'image/' + profilePhotoUrl,
-        linkedin: 'https://www.linkedin.com' + socialMediaUrls.linkedin,
-        instagram: 'https://www.instagram.com' + socialMediaUrls.instagram,
-        facebook: 'https://www.facebook.com' + socialMediaUrls.facebook,
-        youtube: 'https://www.youtube.com' + socialMediaUrls.youtube,
-        github: 'https://www.github.com' + socialMediaUrls.github,
+        profession: 'Frontend Developer',
+        education: 'University',
+        company: 'Company Name inc.',
+        experience: 2,
+        age: 23,
+        location: 'País, ciudad',
     });
 
     const updateProfileData = (data) => {
@@ -43,6 +47,8 @@ export const FakeProfileContextProvider = ({children}) => {
         <FakeProfileContext.Provider value={{
             personalData,
             updateProfileData,
+            socialMediaUrls,
+            profilePhotoUrl,
         }}>
             {children}
         </FakeProfileContext.Provider>
