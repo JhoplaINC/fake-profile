@@ -1,4 +1,4 @@
-import { Profile } from "./components";
+import { Explanation, Footer, Profile } from "./components";
 import { FakeProfileContextProvider } from "./context/FakeProfileContext";
 import './assets/scss/main.scss';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -9,7 +9,9 @@ function App() {
 	return (
 		<>
 			<FakeProfileContextProvider>
+				<Explanation />
 				<Profile />
+				<Footer />
 			</FakeProfileContextProvider>
 		</>
 	)

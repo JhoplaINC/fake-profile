@@ -1,18 +1,29 @@
 import { useState } from 'react';
 import { useFakeProfileContext } from '../context/FakeProfileContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAt, faBuilding, faBuildingColumns, faCalendar, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faBuilding, faBuildingColumns, faCalendar, faGear, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faGithub, faInstagram, faLinkedin, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { UpdatePersonalInfo, UpdateProfessionalInfo } from '../components';
 
 export const Profile = () => {
 
     const { personalData, professionalData, socialMediaUrls, profilePhotoUrl } = useFakeProfileContext();
+    const [showForms, setShowForms] = useState(false);
     const [isCollapseOneOpen, setCollapseOne] = useState(false);
     const [isCollapseTwoOpen, setCollapseTwo] = useState(false);
 
     const toggleCollapse = (collapse) => {
         switch (collapse) {
+            case 'forms':
+                setShowForms(true);
+                setCollapseOne(true);
+                break;
+
+            case 'close':
+                setCollapseOne(false);
+                setCollapseTwo(false);
+                break;
+
             case 'first':
                 setCollapseOne(true);
                 setCollapseTwo(false);
@@ -142,44 +153,59 @@ export const Profile = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="profile-forms">
-                    <p>
+                    <div className="profile-config">
                         <button
-                            className="btn btn-primary"
-                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#show-forms"
+                            aria-expanded="false"
+                            aria-controls="show-forms"
+                            onClick={() => toggleCollapse('forms')}
+                        >
+                            <FontAwesomeIcon icon={faGear} />&nbsp;
+                            Update information
+                        </button>
+                    </div>
+                </div>
+                <div
+                    className={`profile-form collapse${isCollapseOneOpen ? ' show' : '' || isCollapseTwoOpen ? ' show' : ''}`}
+                    id="show-forms"
+                >
+                    <div className="select-forms">
+                        <button
                             data-bs-toggle="collapse"
                             data-bs-target="#forms-collapse1"
                             aria-expanded="false"
                             aria-controls="forms-collapse1"
                             onClick={() => toggleCollapse('first')}
                         >
-                            Toggle second element
+                            personal information
                         </button>
                         <button
-                            className="btn btn-primary"
-                            type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#forms-collapse2"
                             aria-expanded="false"
                             aria-controls="forms-collapse2"
                             onClick={() => toggleCollapse('second')}
                         >
-                            Toggle second element
+                            professional information
                         </button>
-                    </p>
-                    <div className="row" style={{ 'padding': '0', 'margin': '0' }}>
-                        <div className="col-6">
-                            <div className={`collapse${isCollapseOneOpen ? ' show' : ''}`} id="forms-collapse1">
-                                <UpdatePersonalInfo />
-                            </div>
+                        <button
+                            onClick={() => toggleCollapse('close')}
+                        >
+                            Done
+                        </button>
+                    </div>
+
+                    <div className="forms-container">
+                        <div className={`collapse${isCollapseOneOpen ? ' show' : ''}`} id="forms-collapse1">
+                            <UpdatePersonalInfo />
                         </div>
-                        <div className="col-6">
-                            <div className={`collapse${isCollapseTwoOpen ? ' show' : ''}`} id="forms-collapse2">
-                                <UpdateProfessionalInfo />
-                            </div>
+
+                        <div className={`collapse${isCollapseTwoOpen ? ' show' : ''}`} id="forms-collapse2">
+                            <UpdateProfessionalInfo />
                         </div>
                     </div>
+
                 </div>
             </div>
         </>
