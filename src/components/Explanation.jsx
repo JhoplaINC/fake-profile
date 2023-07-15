@@ -11,7 +11,11 @@ export const Explanation = () => {
                         This was developed just for showing you the useState, and useContext React hooks common usage. 
                         Adding to this, you can see how Formik Component works, the form flow and how to manage the data.
                     </p>
-                    <sub className="site-aclaration">Once you refresh this page, all profile data setted will be deleted.</sub>
+                    <p className="site-aclaration">
+                        Once you refresh this page, all profile data setted will be deleted. <br />
+                        Also, we don't recolect any kind of information. Everything in this web is reactive, 
+                        once you refresh or close this page, <b>everything</b> will be deleted.
+                    </p>
                 </div>
             </div>
         </>

@@ -7,7 +7,7 @@ import { UpdatePersonalInfo, UpdateProfessionalInfo } from '../components';
 
 export const Profile = () => {
 
-    const { personalData, professionalData, socialMediaUrls, profilePhotoUrl } = useFakeProfileContext();
+    const { personalData, professionalData, socialMediaUrls } = useFakeProfileContext();
     const [showForms, setShowForms] = useState(false);
     const [isCollapseOneOpen, setCollapseOne] = useState(false);
     const [isCollapseTwoOpen, setCollapseTwo] = useState(false);
@@ -63,7 +63,7 @@ export const Profile = () => {
                 <div className="profile-info">
                     <div className="info-left-side">
                         <div className="profile-photo">
-                            <img src={`images/${profilePhotoUrl}`} alt="Profile Img" />
+                            <img src="images/default_profile_photo.png" alt="Profile Img" />
                         </div>
                         <div className="profile-personal-info">
                             <div className="profile-name">
@@ -172,22 +172,24 @@ export const Profile = () => {
                 >
                     <div className="select-forms">
                         <button
+                            className={`${isCollapseOneOpen ? 'active' : ''}`}
                             data-bs-toggle="collapse"
                             data-bs-target="#forms-collapse1"
                             aria-expanded="false"
                             aria-controls="forms-collapse1"
                             onClick={() => toggleCollapse('first')}
                         >
-                            personal information
+                            personal
                         </button>
                         <button
+                            className={`${isCollapseTwoOpen? 'active' : ''}`}
                             data-bs-toggle="collapse"
                             data-bs-target="#forms-collapse2"
                             aria-expanded="false"
                             aria-controls="forms-collapse2"
                             onClick={() => toggleCollapse('second')}
                         >
-                            professional information
+                            professional
                         </button>
                         <button
                             onClick={() => toggleCollapse('close')}
